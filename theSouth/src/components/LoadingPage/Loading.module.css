@@ -1,0 +1,14 @@
+.container{
+    background-color: whitesmoke;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.spinner{
+    size: 150;
+    border-color: aqua;
+}

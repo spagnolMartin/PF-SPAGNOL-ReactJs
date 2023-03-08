@@ -1,0 +1,11 @@
+.methodsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: auto auto 5% auto;
+    background-color: rgb(73, 77, 77);;
+}
+.payMethod{
+    height: 50px;
+    width: 50px;
+}

@@ -1,0 +1,10 @@
+.intro{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    margin: 50px;
+}
+
+.parr{
+    margin: 10px;
+}

@@ -6,24 +6,23 @@ import { CartContext } from "./CartContext"
 const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
 
-    useEffect(() => {
-        if(loadCart() == null){
-            setCart([])
-        }else{
-            setCart(loadCart())
-        }
-    } ,[])
-
-    const saveCart = () => {
-        sessionStorage.setItem("cart", JSON.stringify(cart))
+    const saveCart = (list) => {
+        sessionStorage.setItem('cart', JSON.stringify(list))
     }
 
     const loadCart = () => {
         return JSON.parse(sessionStorage.getItem('cart'));
     }
 
+    useEffect(() => {
+            if(loadCart() != null) {
+                setCart(loadCart())
+            }
+        } ,[])
+    
     const addProduct = (product, quantity) => {
         if(productExistsInCart(cart, product)) {
+
             const newCart = cart.map((prod) => {
                 if(prod.productCart.name == product.name){
                     prod.quantityCart += quantity
@@ -32,6 +31,7 @@ const CartProvider = ({ children }) => {
                     return prod
                 }
             })
+            saveCart(newCart)
             setCart(newCart)
         } else {
             const cartItem = {
@@ -39,25 +39,26 @@ const CartProvider = ({ children }) => {
                 quantityCart : quantity
             }
             let newCart = [...cart, cartItem]
+            saveCart(newCart)
             setCart(newCart)
         } 
-
-        saveCart()
     }
 
     const clearCart = () => {
-        setCart([ ]);
-        saveCart()
+        setCart([]);
+        saveCart([])
     }
 
     const removeProduct = (product) => {
-        setCart(cart.filter(prod => prod !== product))
-        saveCart()
+        const newCart = cart.filter(prod => prod !== product)
+        saveCart(newCart)
+        setCart(newCart)
     }
 
     const updateQuantity = (product, newQuantity) => {
         if(newQuantity == 0){
             removeProduct(product);
+            saveCart(cart)
         } else {
             const newCart = cart.map((prod) => {
                 if (prod.productCart.id === product.productCart.id) {
@@ -69,11 +70,9 @@ const CartProvider = ({ children }) => {
                   return prod
                 }
               })
-    
+              saveCart(newCart)
               setCart(newCart)
         }
-
-        saveCart()
     }
     
 

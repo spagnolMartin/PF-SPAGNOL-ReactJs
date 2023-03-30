@@ -3,9 +3,10 @@ import React, { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext';
 import CartList from '../CartList/CartList';
 import { cartSize, totalCart } from '../../utils/Utils';
-import {addDoc, collection} from 'firebase/firestore'
+import {addDoc, collection, doc, getDoc} from 'firebase/firestore'
 import db from '../../../db/firebase-config.js'
 import { useNavigate } from 'react-router-dom';
+import { response } from 'har-validator';
 
 function Cart() {
   const {cart, clearCart} = useContext(CartContext)
@@ -13,9 +14,10 @@ function Cart() {
   const [nameInput, setNameInput] = useState('')
   const [phoneInput, setPhoneInput] = useState('')
   const [addressInput, setAddressInput] = useState('')
+  const [orderId, setOrderId] = useState(null)
   const navigate = useNavigate()
 
-  const handleSubmit = async (e) => {
+  const createOrder = async (e) => {
     e.preventDefault()
     const order = {
       email: emailInput,
@@ -24,20 +26,31 @@ function Cart() {
       address: addressInput,
       detail: cart
     }
+
     setEmailInput('')
     setAddressInput('')
     setNameInput('')
     setPhoneInput('')
-    clearCart()
-
+    
     //Add the order to the collection.
     const ordersCollectionRef = collection(db, "orders");	
     await addDoc(ordersCollectionRef, order)
+    .then((response) => {
+      setOrderId(response.id)
+    })
 
+    setTimeout(() => {
+      setOrderId(null)
+      clearCart()
+    }, 10000)
   }
-  
+
+
   return (
       <>
+        {
+
+        }
         {cartSize(cart) > 0 ? 
         <div className={styles.container}>
             <CartList list={cart} />
@@ -49,7 +62,7 @@ function Cart() {
                 <p><b className={styles.total}>TOTAL </b></p>
                 <p className={styles.total}> ${totalCart(cart)}</p>
               </div>
-              <form className={styles.orderContainer} onSubmit={(e) => handleSubmit(e)}>
+              <div className={styles.orderContainer}>
                 <p className={styles.title} style={{marginLeft: '0px'}}><b>MAKE YOUR ORDER </b></p>
                 <label className={styles.label}>Email</label>
                 <input className={styles.input} value={emailInput} placeholder={"example@gmail.com"} onChange={(e) => setEmailInput(e.target.value)} required/>
@@ -59,8 +72,14 @@ function Cart() {
                 <input className={styles.input} value={phoneInput} placeholder={"1155826541"} onChange={(e) => setPhoneInput(e.target.value)} required/>
                 <label className={styles.label}>Address</label>
                 <input className={styles.input} value={addressInput} placeholder={"exampleStreet 123, exampleCity"} onChange={(e) => setAddressInput(e.target.value)} required/>
-                <button className={styles.button} style={{marginLeft:'0px'}}>CONFIRM ORDER</button>
-              </form>
+                <button className={styles.button} style={{marginLeft:'0px'}} onClick={(e) => createOrder(e)}>CONFIRM ORDER</button>
+                {orderId ?<div className={styles.orderId}>
+                            <p>Your order number is: <b>{orderId}</b></p>
+                            <p><b>SAVE IT!</b></p> 
+                         </div> 
+                : null}
+                <button className={styles.button} style={{marginLeft:'0px'}} onClick={(e) => clearCart(e)}>CLEAN CART </button>
+              </div>
             </div>
         </div> : 
         <div className={styles.emptyContainer}>

@@ -6,7 +6,6 @@ import { cartSize, totalCart } from '../../utils/Utils';
 import {addDoc, collection, doc, getDoc} from 'firebase/firestore'
 import db from '../../../db/firebase-config.js'
 import { useNavigate } from 'react-router-dom';
-import { response } from 'har-validator';
 
 function Cart() {
   const {cart, clearCart} = useContext(CartContext)

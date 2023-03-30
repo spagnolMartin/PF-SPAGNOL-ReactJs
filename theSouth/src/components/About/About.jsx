@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import Background from '../Background/Background'
 import styles from './About.module.css'
-import aboutBackground from '../../images/mainBack1.jpg'
+import aboutBackground from '../../images/MainBack1.jpg'
 import campingImage from '../../images/campingImage.jpg'
 
 function About() {

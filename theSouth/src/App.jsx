@@ -15,7 +15,7 @@ import Home from './components/Home/Home'
 import About from './components/About/About'
 import ItemListContainer from './components/ItemListContainer/ItemListContainer';
 import Footer from './components/Footer/Footer';
-import ItemDetailContainer from './components/itemDetailContainer/ItemDetailContainer';
+import ItemDetailContainer from './components/ItemDetailContainer/ItemDetailContainer';
 import Loading from './components/LoadingPage/Loading';
 import Page404 from './components/Page404/Page404';
 import Cart from './components/Cart/Cart';

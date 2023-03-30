@@ -1,11 +1,36 @@
 .methodsContainer{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-evenly;
-    margin: auto auto 5% auto;
-    background-color: rgb(73, 77, 77);;
+    width: 100%;
 }
 .payMethod{
     height: 50px;
     width: 50px;
+}
+
+.main{
+    margin-top: 2%;
+}
+
+.payments{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 2% 0 2% 0 ;
+}
+
+.paymentsTitle{
+    margin-bottom: 1%;
+}
+
+.image{
+    max-width: 400px;
+    max-height: 300px;
+}
+
+.boots{
+    text-decoration: none;
 }

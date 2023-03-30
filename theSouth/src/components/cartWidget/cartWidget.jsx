@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './CartWidget.module.css'
 import { BsFillCartFill} from "react-icons/bs";
+import { CartContext } from '../../contexts/CartContext'
+import { cartSize } from '../../utils/Utils';
 
 function CartWidget() {
+  const {cart} = useContext(CartContext)
+
   return (
     <div className={styles.container}>
-            <a href="">
               <button type="button" className="cart-btn btn "  
                 data-target="#cart">
                 <BsFillCartFill className={styles.cart}/> 
-               (<span className="total-count">0</span>)
+               (<span className="total-count">{cartSize(cart)}</span>)
               </button>
-            </a>
     </div>
   )
 }

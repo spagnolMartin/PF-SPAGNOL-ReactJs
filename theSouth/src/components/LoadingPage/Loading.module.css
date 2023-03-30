@@ -1,7 +1,7 @@
 .container{
-    background-color: whitesmoke;
     height: 100%;
     width: 100%;
+    margin-top: 20%;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -9,6 +9,20 @@
 }
 
 .spinner{
-    size: 150;
-    border-color: aqua;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 5px solid #05cbaa;
+    border-top: 5px solid #5550b1;	
+    animation: spin 1s infinite;
+}
+
+@keyframes spin {
+    0%{
+        transform: rotate(25deg);
+    }    
+
+    100%{
+        transform: rotate(360deg);
+    }
 }

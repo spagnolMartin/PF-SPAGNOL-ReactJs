@@ -1,10 +1,46 @@
-.intro{
+.container{
+    justify-self: center;
+    margin: 2% auto 2% auto;
+    justify-content: center;
+    align-items: center;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 85%;
+    width: 80%;
+    background-color: rgb(184, 184, 184);
+}
+
+
+.intro{
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: nowrap;
     flex-direction: column;
     justify-content:center;
     margin: 50px;
+    height: 80%;
+    width: 700px;
 }
 
 .parr{
+    font-size: 18px;
     margin: 10px;
+}
+
+.image{
+    max-height: 650px;
+
+}
+
+@media screen and (max-width: 1540px) {
+    .image{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 625px) {
+    .parr{
+        font-size: 15px;
+    }
 }
